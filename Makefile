@@ -82,7 +82,7 @@ stage2.elf32.gz: FORCE
 
 %.bin: %.elf stage2.elf32.gz
 	@$(OBJCOPY) -O binary $< $@
-	@truncate --size=262128 $@ # 256k - footer size
+	@truncate --size=524272 $@ # 512K - footer size (16K)
 	@echo -n "xxxxxxxxxxxxxxxx" >> $@ # add footer
 	@dd if=stage2.elf32.gz of=$@ conv=notrunc bs=16384 seek=1 # inject stage2
 
